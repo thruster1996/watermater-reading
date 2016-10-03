@@ -1,0 +1,2 @@
+se = strel('rectangle',[4,4]);
+>> I_3 = imopen(I_2,se);
