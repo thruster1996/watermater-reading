@@ -1,2 +1,115 @@
-se = strel('rectangle',[4,4]);
->> I_3 = imopen(I_2,se);
+function [ result,farpoint ] = version_1( Image )
+%UNTITLED 此处显示有关此函数的摘要
+%此函数为水表读数的第一个版本，未进行优化
+%   此处显示详细说明
+%首先导入图片，对图片进行二值化，然后利用hough变化检测存在的圆形并获取圆心（这里有一个）
+%不知道的错误，就是不能找到所有的全部圆心），然后利用圆心数据做为种子生长的基础，利用种子生长法得到
+%各个部分的指针图像生长，最后得到数据读取的图像
+
+
+%变成灰度图像，便于后期寻找圆
+I = rgb2gray(Image);
+
+%找到圆心和半径，其中40和60目前取的是经验值，此范围内正好可找到所有的圆心
+[centers,radii] = imfindcircles(I,[40,60]);
+
+%取各个圆心进行种子生长
+
+%采用种子生长法目前的生长效果没有直接用形态学计算效果好，所以先用形态学处理的办法得到与论文中类似
+%类似的结果
+
+% 形态学处理的过程是首先将其变成灰度图(前面已有)，然后利用自带的大津法找到阈值，之后进行二值化。二值化之后
+% 二值化之后利用3*3矩阵进行闭运算即可得到基本的图像
+
+level = graythresh(I);
+I1= im2bw(I,level);
+se = strel('rectangle',[3,3]);
+I2 = imclose(I1,se); 
+
+%然后对图像翻转，去小块(面积用400)
+I3 = ~I2;
+I4 = bwareaopen(I3,400);
+
+% 去大块的方法是通过利用前面的圆检测方法得到的圆心和半径去掉大块，具体方法是便利整个图像，
+% 若这个点不在八个圆面积内，则将这个点变为0
+r = radii(1) - 1;
+distance = 1:8;
+[row,col] = size(I);
+distance_temp = 1:8; %用于存放当前较大的distance
+farpoint = zeros(8,2);
+
+for i = 1 : row
+    for j = 1 : col
+        for k = 1 : 8
+            x0 = centers(k,1);
+            y0 = centers(k,2);
+            distance(k)= (i-y0)^2 + (j-x0)^2;
+        end
+        if distance(1) > r*r && distance(2) > r*r && distance(3) > r*r ...
+&& distance(4) > r*r && distance(5) > r*r && distance(6) > r*r...
+&& distance(7) > r*r && distance(8) > r*r
+            I4(i,j) = 0;
+% 前面是去噪部分，用于只保留最基本的指针区域，后面的部分用于计算距离圆心最远的一个点
+% 并将其存储在farpoint矩阵中，用于和圆心一起计算向量的指向；
+        elseif distance(1) < r*r && I(i,j) ~= 0;
+            if distance(1) >= distance_temp(1)
+                distance_temp(1) = distance(1);
+                farpoint(1,1) = j;
+                farpoint(1,2) = i;
+            end
+            
+        elseif distance(2) < r*r && I(i,j) ~= 0;
+            if distance(2) >= distance_temp(2)
+                distance_temp(2) = distance(2);
+                farpoint(2,1) = j;
+                farpoint(2,2) = i;
+            end
+            
+         elseif distance(3) < r*r && I(i,j) ~= 0;
+            if distance(3) >= distance_temp(3)
+                distance_temp(3) = distance(3);
+                farpoint(3,1) = j;
+                farpoint(3,2) = i;
+            end
+            
+         elseif distance(4) < r*r && I(i,j) ~= 0;
+            if distance(4) >= distance_temp(4)
+                distance_temp(4) = distance(4);
+                farpoint(4,1) = j;
+                farpoint(4,2) = i;
+            end
+            
+         elseif distance(5) < r*r && I(i,j) ~= 0;
+            if distance(5) >= distance_temp(5)
+                distance_temp(5) = distance(5);
+                farpoint(5,1) = j;
+                farpoint(5,2) = i;
+            end
+            
+         elseif distance(6) < r*r && I(i,j) ~= 0;
+            if distance(6) >= distance_temp(6)
+                distance_temp(6) = distance(6);
+                farpoint(6,1) = j;
+                farpoint(6,2) = i;
+            end
+            
+         elseif distance(7) < r*r && I(i,j) ~= 0;
+            if distance(7) >= distance_temp(7)
+                distance_temp(7) = distance(7);
+                farpoint(7,1) = j;
+                farpoint(7,2) = i;
+            end
+                
+         elseif distance(8) < r*r && I(i,j) ~= 0;
+            if distance(8) >= distance_temp(8)
+                distance_temp(8) = distance(8);
+                farpoint(8,1) = j;
+                farpoint(8,2) = i;
+            end
+
+    end
+end
+
+result = I4;
+
+end
