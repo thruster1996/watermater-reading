@@ -1,0 +1,279 @@
+>> I = imread('C:\Users\Ziqi YU\Desktop\shuibiao2.jpg');
+>> [ result,farpoint,centers ] = version_1(I);
+>> centers
+
+centers =
+
+  168.7761  348.5528
+  212.5841   98.1601
+  310.4331   94.7622
+  138.7972  164.2380
+  120.9619  262.1658
+  388.9622  155.3078
+  413.2255  251.9709
+  372.5062  341.6742
+
+>> centers_sort = sort(centers);
+>> centers_sorted
+未定义函数或变量 'centers_sorted'。
+ 
+>> clear centers_sort
+>> centers_sorted = sort(centers);
+>> centers_sorted
+
+centers_sorted =
+
+  120.9619   94.7622
+  138.7972   98.1601
+  168.7761  155.3078
+  212.5841  164.2380
+  310.4331  251.9709
+  372.5062  262.1658
+  388.9622  341.6742
+  413.2255  348.5528
+
+>> for i = 1 : 8
+end
+>> for i = 1:8
+baseline = baseline(centers);
+baseline
+centers
+
+;
+end
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+
+centers =
+
+  168.7761  348.5528
+  212.5841   98.1601
+  310.4331   94.7622
+  138.7972  164.2380
+  120.9619  262.1658
+  388.9622  155.3078
+  413.2255  251.9709
+  372.5062  341.6742
+
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+>> baseline
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+>> baseline
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+>> vec = zeros(8,2);
+>> vec
+
+vec =
+
+     0     0
+     0     0
+     0     0
+     0     0
+     0     0
+     0     0
+     0     0
+     0     0
+
+>> angle_vector =  FindAngle( centers,farpiont,baseline );
+未定义函数或变量 'farpiont'。
+ 
+是不是想输入:
+>> angle_vector =  FindAngle( centers,farpoint,baseline );
+未定义函数或变量 'diplay_vector'。
+
+出错 FindAngle (line 21)
+    temp_vector = [(diplay_vector(i,1)),display_vector(i,2)];
+ 
+>> angle_vector =  FindAngle( centers,farpoint,baseline );
+>> angle_vector
+
+angle_vector =
+
+  151.8264
+  103.3756
+   68.7259
+  170.8560
+   79.4448
+   35.8045
+   55.7227
+  134.2374
+
+>> imshow(I);
+>> figure.imshow(result);
+未定义变量 "figure" 或类 "figure.imshow"。
+ 
+>> imshow(result);
+>> baseline
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+>> imshow(result);
+>> hold
+已锁定最新绘图
+>> line([baseline(1,1),baseline(2,1)],[baseline(1,2),baseline(2,2)]);
+>> imshow(result);
+>> centers_sorted
+
+centers_sorted =
+
+  120.9619   94.7622
+  138.7972   98.1601
+  168.7761  155.3078
+  212.5841  164.2380
+  310.4331  251.9709
+  372.5062  262.1658
+  388.9622  341.6742
+  413.2255  348.5528
+
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline
+
+baseline =
+
+  267.0937  221.6575
+  263.8797  219.9172
+
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = zeros(2,2);
+>> baseline
+
+baseline =
+
+     0     0
+     0     0
+
+>> baseline(1,1) 
+
+ans =
+
+     0
+
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline
+
+baseline =
+
+     0     0
+     0     0
+
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline
+
+baseline =
+
+     0     0
+     0     0
+
+>> 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline
+
+baseline =
+
+     0     0
+     0     0
+
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> baseline = baseline(centers);
+下标索引必须为正整数类型或逻辑类型。
+ 
+>> centers
+
+centers =
+
+  168.7761  348.5528
+  212.5841   98.1601
+  310.4331   94.7622
+  138.7972  164.2380
+  120.9619  262.1658
+  388.9622  155.3078
+  413.2255  251.9709
+  372.5062  341.6742
+
+>> baseline
+
+baseline =
+
+     0     0
+     0     0
+
+>> baseline = baseline2(centers);
+>> baseline = baseline2(centers);
+未定义函数或变量 'centers_sorted'。
+
+出错 baseline2 (line 22)
+baseline_get(1,1) = (centers_sorted(1,1) + centers_sorted(8,1))/2;
+ 
+>> baseline = baseline2(centers);
+>> baseline
+
+baseline =
+
+  267.0937  257.0683
+  261.5086   96.4612
+
+>> line([baseline(1,1),baseline(2,1)],[baseline(1,2),baseline(2,2)]);
+>> angle_vector =  FindAngle( centers,farpoint,baseline );
+>> angle_vector
+
+angle_vector =
+
+  148.6001
+   43.8021
+  128.2994
+  129.5705
+  139.0183
+   95.3780
+  115.2963
+   74.6639
+
+>> 
